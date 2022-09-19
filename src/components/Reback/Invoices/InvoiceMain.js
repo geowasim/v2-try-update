@@ -4,9 +4,9 @@ import InvoiceComponent from "./InvoiceComponent";
 
 import "./style.css";
 
-const InvoiceMain = ({ cartItems }) => {
+const InvoiceMain = ({ cartItems, basket }) => {
   const [totalToReturn, setTotalToReturn] = useState([]);
-  const [newCartItems, setNewCartItems] = useState(cartItems);
+  const [newCartItems, setNewCartItems] = useState(basket.cartItems);
 
   function getModifiedItem(item) {
     //found the item in the cart and modify with match id
@@ -22,14 +22,6 @@ const InvoiceMain = ({ cartItems }) => {
     );
   }
 
-  for (let index = 0; index < newCartItems.length; index++) {
-    const element1 = newCartItems[index];
-    const element2 = cartItems[index];
-
-    console.log("newCart", element1.title, element1.qty);
-    console.log("oldCart", element2.title, element2.qty);
-  }
-
   const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
   const itemPriceWithVat = itemsPrice * 0.15 + itemsPrice;
   const sum = totalToReturn.reduce((acc, item) => acc + item, 0);
@@ -37,6 +29,7 @@ const InvoiceMain = ({ cartItems }) => {
   // console.log({ needed: { sum, itemPriceWithVat, newCartItems } });
   return (
     <div>
+      <div>InvoiceNumner # {basket.invoiceNumber.sn}</div>
       <div className="one">
         <p>Total:{itemPriceWithVat}</p>
         <p>Money to return to client : {sum.toFixed(2)}</p>

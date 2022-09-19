@@ -54,6 +54,7 @@ export default function Reback() {
         setFindInvoice("");
         return;
       }
+
       SetBasket((basket) => (basket.invoiceNumber = found));
       console.log("findInvoice", findInvoice);
       setError(false);
@@ -94,7 +95,9 @@ export default function Reback() {
         </button>
       </form>
       {error ? <h4>Please Check the invoice number</h4> : null}
-      {!error && cartItems && <InvoiceMain cartItems={cartItems} />}
+      {!error && cartItems && (
+        <InvoiceMain basket={basket} cartItems={cartItems} />
+      )}
       {/* {invoiceToReturn &&
         invoiceToReturn.cartItems.map((item) => {
           return (

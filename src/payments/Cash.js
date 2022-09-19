@@ -46,7 +46,7 @@ export default function Cash(props) {
     const ttt = count * 0.15 + count;
     function checkInput() {
       if (count2 < ttt) {
-        console.log("WWWWWWWWWWWWWW");
+        // console.log("WWWWWWWWWWWWWW");
         //اخفاء المعاينة
       }
     }

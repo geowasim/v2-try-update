@@ -8,6 +8,7 @@ import {
   updateDoc,
   doc,
   // addDoc,
+  limit,
   deleteDoc,
   orderBy,
 } from "firebase/firestore";
@@ -30,7 +31,11 @@ function Invoices(props) {
 
   // Read todo from firebase
   useEffect(() => {
-    const q = query(collection(db, "todos"), orderBy("invoiceNumber", "desc"));
+    const q = query(
+      collection(db, "todos"),
+      orderBy("invoiceNumber", "desc"),
+      limit(25)
+    );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
       querySnapshot.forEach((doc) => {
