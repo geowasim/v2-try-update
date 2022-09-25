@@ -22,20 +22,20 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
   return (
     <div className="fatorah" ref={ref}>
       <div className="com_title">
-        <h2>Qandella</h2>
-        <h2> كانديـــلا </h2>
+        {/* <h2>Qandella</h2> */}
+        <h2> مؤسسة النظرة الرقيقة للتجارة </h2>
         <br />
         <div className="under_line"></div>
         <br />
       </div>
       <div className="perData">
-        <p>معرض صناع العطور - الاحساء</p>
+        <p>معرض الاحساء للعطور والبخور</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
         <p>Vat: 310430668500003 :الرقم الضريبي</p>
 
-        <p>C.R: 1010208753 :س .ت</p>
+        <p>C.R: 1010725434 :س .ت</p>
       </div>
       <div className="clientDataContainer">
         <div className="L1">
