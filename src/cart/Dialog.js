@@ -13,6 +13,8 @@ function Dialog(props) {
     paidMoney,
     change,
     serialNumber,
+    itemPriceBefore,
+    isOffer,
   } = props;
 
   return (
@@ -58,6 +60,8 @@ function Dialog(props) {
           handlePrint={handlePrint}
           handleIsPrint={handleIsPrint}
           createInvoice={createInvoice}
+          itemPriceBefore={itemPriceBefore}
+          isOffer={isOffer}
         />
         <h3
           style={{

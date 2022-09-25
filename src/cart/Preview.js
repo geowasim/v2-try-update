@@ -1,4 +1,5 @@
 import React from "react";
+import OfferComponent from "../OffersComponent/OfferComponent";
 
 const Preview = React.forwardRef((props, ref) => {
   const {
@@ -9,6 +10,9 @@ const Preview = React.forwardRef((props, ref) => {
     change,
     serialNumber,
     timeInMyPC,
+    isOffer,
+    codeE,
+    itemPriceBefore,
   } = props;
 
   return (
@@ -18,7 +22,7 @@ const Preview = React.forwardRef((props, ref) => {
       style={{ height: "82vh", width: "100%" }}
     >
       <div className="perData">
-        <p>معرض صناع العطور الثاني - الطائف</p>
+        <p>معرض صناع العطور - الاحساء</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
@@ -83,8 +87,32 @@ const Preview = React.forwardRef((props, ref) => {
         </table>
         <div className="paymentDataContainer">
           <div className="paymentData ">
+            {isOffer && (
+              <div className="L1" style={{ fontSize: "12px" }}>
+                <p
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span> المبلغ السابق بدون الضريبة</span>{" "}
+                  <span>Subtotal no discount:</span>{" "}
+                </p>
+                <h4>{itemPriceBefore} SAR</h4>
+              </div>
+            )}
+            {isOffer && (
+              <div className="L1">
+                <p>Discount *</p>
+                <p>
+                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                </p>
+              </div>
+            )}
             <div className="L1">
-              <p>Total without VAT </p>
+              <p>Subtotal without VAT </p>
               <p>{Math.ceil(itemsPrice)} SAR</p>
             </div>
             <div className="L1">
@@ -144,12 +172,13 @@ const Preview = React.forwardRef((props, ref) => {
         <br />
       </div>
       <hr />
-      <div className="welcome">
+      <OfferComponent codeE={"HAS432"} />
+      {/* <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
         <p> Thank you for choosing our products</p>
         <p>See you soon!</p>
         <p>😊</p>
-      </div>
+      </div> */}
       <hr />
     </div>
   );

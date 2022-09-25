@@ -32,6 +32,7 @@ const Item = (props) => {
               onClick={() => {
                 onAdd(showItem);
                 setShowCalc(false);
+                console.log("item has been added");
               }}
             >
               إضافة للسلة

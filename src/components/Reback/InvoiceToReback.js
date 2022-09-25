@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 
 const Invoicetoreback = ({ item }) => {
-  console.log("item", item);
   const [count, setCount] = useState();
   return (
     <>

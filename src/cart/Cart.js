@@ -18,6 +18,8 @@ import {
   // deleteDoc,
 } from "firebase/firestore";
 import Dialog from "./Dialog";
+import { totalBeforeAfterOfferType } from "../OfferFunction";
+import MethodsOfPayment from "./MethodsOfPayment";
 
 const Basket = (props) => {
   const {
@@ -34,24 +36,30 @@ const Basket = (props) => {
   const [paidMoney, setPaidMoney] = useState(null);
   const [change, setChange] = useState(null);
   const [hideQuestionShowPay, setHideQuestionShowPay] = useState(false);
+  const [isOffer, setIsOffer] = useState(false);
+  const [codeE, setCodeE] = useState("HAS432");
 
-  const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
+  const otherPrice = totalBeforeAfterOfferType(cartItems).otherPrice;
+  const perfumePrice = totalBeforeAfterOfferType(cartItems).after;
+
+  useEffect(() => {
+    if (Math.max(...totalBeforeAfterOfferType(cartItems).offerType) > 1) {
+      setIsOffer(true);
+    } else {
+      setIsOffer(false);
+    }
+  }, [cartItems]);
+
+  // console.log(totalBeforeAfterOfferType(cartItems));
+  const itemPriceBefore = totalBeforeAfterOfferType(cartItems).before;
+  // console.log(itemPriceBefore * 0.15 + itemPriceBefore);
+  const itemsPrice = perfumePrice + otherPrice;
+
   const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
 
   const taxPrice = itemsPrice * 0.15;
   // const bagPrice = itemsPrice > 300 ? 0 : 7;
   const totalPrice = taxPrice + itemsPrice;
-
-  // function handlePriceForCash(totalPrice, method) {
-  //   if (method === "Cash") {
-  //     totalPrice = Math.round(totalPrice);
-  //   }
-  //   return totalPrice;
-  // }
-
-  // useEffect(() => {
-  //   handlePriceForCash();
-  // }, [totalPrice]);
 
   const componentRef = useRef();
   const handleReactToPrint = useReactToPrint({
@@ -96,6 +104,7 @@ const Basket = (props) => {
   }, [serialNumber]);
 
   const timeInMyPC = String(new Date().toLocaleString());
+
   // Create invoice
   const createInvoice = async () => {
     await addDoc(collection(db, "todos"), {
@@ -110,11 +119,11 @@ const Basket = (props) => {
         paidMoney: paidMoney,
         change: change,
       },
-
       date: serverTimestamp(),
       dateMyPC: timeInMyPC,
       totalPrice: totalPrice,
       totalItems: totalItems,
+      off: { isOffer: isOffer, codeE: codeE },
     });
   };
   return (
@@ -122,17 +131,18 @@ const Basket = (props) => {
       <div className="basket">
         <h2 className="basketName">السلة</h2>
         {/* <p style={{ color: "red" }}>{handlePriceForCash(totalPrice, method)}</p> */}
-        {/* {cartItems.length !== 0 && (
+        {cartItems.length !== 0 && (
           <button
             className="cancelOrder"
             onClick={() => {
               resetCartItems();
               handleIsPrint();
+              setIsOffer(false);
             }}
           >
-            إلغاء الطلب
+            إفراغ السلة
           </button>
-        )} */}
+        )}
         <div className="basketName">
           {cartItems.length === 0 && (
             <div>
@@ -178,6 +188,9 @@ const Basket = (props) => {
                 change={change}
                 serialNumber={serialNumber}
                 timeInMyPC={timeInMyPC}
+                totalPrice={totalPrice}
+                isOffer={isOffer}
+                itemPriceBefore={itemPriceBefore}
               />
               {/* ------------ */}
             </div>
@@ -216,6 +229,9 @@ const Basket = (props) => {
           </>
         )}
         <hr />
+        {/* handle method of payment */}
+        {/* choose payment method */}
+        {cartItems.length !== 0 && <MethodsOfPayment />}
         {cartItems.length !== 0 && (
           <div className="payments">
             <div className="paymentArea">
@@ -264,6 +280,9 @@ const Basket = (props) => {
                   paidMoney={paidMoney}
                   change={change}
                   serialNumber={serialNumber}
+                  codeE={codeE}
+                  itemPriceBefore={itemPriceBefore}
+                  isOffer={isOffer}
                 />
               )}
             </div>
@@ -288,3 +307,21 @@ const Basket = (props) => {
 };
 
 export default Basket;
+
+// const sortOther = cartItems.filter((x) => x.category !== "Perfume");
+// const otherPrice = sortOther.reduce((a, c) => a + c.price * c.qty, 0);
+
+// const sortPerfumes = cartItems.filter((x) => x.category === "Perfume");
+// console.log(sortPerfumes);
+
+// const perfumesPrice = sortPerfumes.length
+//   ? totalBeforeAfterOfferType(sortPerfumes)[1].after
+//   : 0;
+
+// useEffect(() => {
+//   if (sortPerfumes.length > 1) {
+//     setIsOffer(true);
+//   }
+// }, [perfumesPrice]);
+
+// console.log("perfumesPrice", perfumesPrice * 0.15 + perfumesPrice);

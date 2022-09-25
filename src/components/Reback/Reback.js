@@ -56,7 +56,7 @@ export default function Reback() {
       }
 
       SetBasket((basket) => (basket.invoiceNumber = found));
-      console.log("findInvoice", findInvoice);
+      // console.log("findInvoice", findInvoice);
       setError(false);
       setInvoiceToReturn(found);
       setFindInvoice("");
@@ -94,7 +94,9 @@ export default function Reback() {
           Search
         </button>
       </form>
-      {error ? <h4>Please Check the invoice number</h4> : null}
+      {error ? (
+        <h4 style={{ textAlign: "center" }}>Please Check the invoice number</h4>
+      ) : null}
       {!error && cartItems && (
         <InvoiceMain basket={basket} cartItems={cartItems} />
       )}
@@ -112,7 +114,7 @@ export default function Reback() {
           onClick={() => {
             setError(false);
             setFindInvoice("");
-            setTodos("");
+            // setTodos("");
             setInvoiceToReturn("");
           }}
         >

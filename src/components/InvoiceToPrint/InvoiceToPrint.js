@@ -1,4 +1,5 @@
 import React from "react";
+import OfferComponent from "../../OffersComponent/OfferComponent";
 import "./InvoiceToPrint.css";
 
 export const InvoiceToPrint = React.forwardRef((props, ref) => {
@@ -7,20 +8,21 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
   //   props;
 
   const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
-  const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
+  // const itemsPrice = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
+  // const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
 
-  const taxPrice = itemsPrice * 0.15;
+  // const taxPrice = itemsPrice * 0.15;
   // const bagPrice = itemsPrice > 300 ? 0 : 7;
-  const totalPrice = taxPrice + itemsPrice;
+  // const totalPrice = taxPrice + itemsPrice;
 
-  function calculateDateTime() {
-    var timestamp = todo.date.seconds * 1000;
-    var date = new Date(timestamp);
+  // function calculateDateTime() {
+  //   var timestamp = todo.date.seconds * 1000;
+  //   var date = new Date(timestamp);
 
-    return `${date.getDate()}/${
-      date.getMonth() + 1
-    }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  }
+  //   return `${date.getDate()}/${
+  //     date.getMonth() + 1
+  //   }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  // }
 
   return (
     <div className="fatorah" ref={ref}>
@@ -32,7 +34,7 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
         <br />
       </div>
       <div className="perData">
-        <p>معرض صناع العطور الثاني - الطائف</p>
+        <p>معرض صناع العطور - الاحساء</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
@@ -147,7 +149,9 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
         </div>{" "}
         <br />
       </div>
+      <hr />
       <br />
+      <OfferComponent codeE={"HAS432"} />
       <hr />
       <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
@@ -158,3 +162,5 @@ export const InvoiceToPrint = React.forwardRef((props, ref) => {
     </div>
   );
 });
+
+// join the offer to db to keep in history

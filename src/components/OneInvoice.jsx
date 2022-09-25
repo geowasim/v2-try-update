@@ -1,15 +1,15 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
-import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { InvoiceToPrint } from "./InvoiceToPrint/InvoiceToPrint";
 import { useReactToPrint } from "react-to-print";
-import { FaRegTrashAlt, FaPrint, FaEdit } from "react-icons/fa";
+import { FaRegTrashAlt, FaPrint } from "react-icons/fa";
 
 import "./OneInvoice.css";
-import Reback from "./Reback/Reback";
+// import Reback from "./Reback/Reback";
 import { createContext } from "react";
+import { totalBeforeAfterOfferType } from "../OfferFunction";
 
 export const InvoiceContext = createContext();
 
@@ -20,7 +20,7 @@ const OneInvoice = ({
   handleEdit,
   readDataFromInvoiceComponent,
 }) => {
-  const { cartItems, methodArray, invoiceNumber } = todo;
+  const { cartItems, methodArray, invoiceNumber, off } = todo;
   const [cartItemsArrays, setCarItemsArrays] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,12 @@ const OneInvoice = ({
     setCarItemsArrays(arr);
   }, [cartItems]);
 
-  const subtotal = cartItemsArrays.reduce((a, c) => a + c.price * c.qty, 0);
+  const otherPrice = totalBeforeAfterOfferType(cartItemsArrays).otherPrice;
+  const perfumePrice = totalBeforeAfterOfferType(cartItemsArrays).after;
+
+  const subtotal = perfumePrice + otherPrice;
+  // console.log("off", off);
+  // const subtotal = Math.round(todo.totalPrice);
   const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
 
   const componentRef = useRef();
@@ -46,7 +51,7 @@ const OneInvoice = ({
     handleReactToPrint();
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // const rebackHandler = (todo) => {
   //   readDataFromInvoiceComponent(todo);
@@ -61,6 +66,7 @@ const OneInvoice = ({
         invoiceNumber,
         cartItemsArrays,
         subtotal,
+        off,
       }}
     >
       <div className="myOneInvoice">
@@ -88,7 +94,7 @@ const OneInvoice = ({
         <Reback />
         <p onClick={() => rebackHandler(todo)}>Edit</p> */}
 
-        {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
+        <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button>
         <div style={{ display: "none" }}>
           <InvoiceToPrint
             todo={todo}
@@ -96,6 +102,7 @@ const OneInvoice = ({
             cartItemsArrays={cartItemsArrays}
             methodArray={methodArray}
             invoiceNumber={invoiceNumber}
+            subtotal={subtotal}
           />
         </div>
       </div>
@@ -104,52 +111,3 @@ const OneInvoice = ({
 };
 
 export default OneInvoice;
-
-/**
- *
-// const style = {
-//   li: `flex justify-between bg-slate-200 p-4 my-2 capitalize`,
-//   liComplete: `flex justify-between bg-slate-400 p-4 my-2 capitalize`,
-//   row: `flex`,
-//   text: `ml-2 cursor-pointer`,
-//   textComplete: `ml-2 cursor-pointer line-through`,
-//   button: `cursor-pointer flex items-center`,
-// }; 
- * 
- * 
- *       <li className={todo.completed ? style.liComplete : style.li}>
-        <div className={style.row}>
-          <input
-            onChange={() => toggleComplete(todo)}
-            type="checkbox"
-            checked={todo.completed ? "checked" : ""}
-          />
-          <p
-            onClick={() => toggleComplete(todo)}
-            className={todo.completed ? style.textComplete : style.text}
-          ></p>
-          <div>
-            <p>method : {methodArray.method}</p>
-            <p>Total: {(subtotal * 15) / 100 + subtotal}</p>
-          </div>
-        </div>
-        <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button>
-      </li>
- */
-
-/**
-       *   // function calculateDateTime() {
-  //   var timestamp = todo.date.seconds * 1000;
-  //   var date = new Date(timestamp);
-
-  //   return `${date.getDate()}/${
-  //     date.getMonth() + 1
-  //   }/${date.getFullYear()}-${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  // }
-
-  // function handleOnePrint() {
-  //   console.log(todo.invoiceNumber.sn);
-  //   if (todo.invoiceNumber.sn === invoiceNumber.sn) {
-  //   }
-  // }
-       */

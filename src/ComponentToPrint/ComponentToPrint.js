@@ -1,4 +1,5 @@
 import React from "react";
+import OfferComponent from "../OffersComponent/OfferComponent";
 
 import "./ComponentToPrint.css";
 
@@ -11,8 +12,12 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     change,
     serialNumber,
     timeInMyPC,
+    // totalPrice,
+    isOffer,
+    itemPriceBefore,
   } = props;
-
+  // console.log("itemsPrice", itemsPrice);
+  // console.log("itemsPriceBefore", itemPriceBefore);
   return (
     <div className="fatorah" ref={ref}>
       <div className="com_title">
@@ -23,7 +28,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         <br />
       </div>
       <div className="perData">
-        <p>معرض صناع العطور الثاني - الطائف</p>
+        <p>معرض صناع العطور - الاحساء</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
@@ -89,6 +94,30 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         </table>
         <div className="paymentDataContainer">
           <div className="paymentData ">
+            {isOffer && (
+              <div className="L1" style={{ fontSize: "12px" }}>
+                <p
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <span> المبلغ السابق بدون الضريبة</span>{" "}
+                  <span>Subtotal no discount:</span>{" "}
+                </p>
+                <h4>{itemPriceBefore} SAR</h4>
+              </div>
+            )}
+            {isOffer && (
+              <div className="L1">
+                <p>Discount *</p>
+                <p>
+                  <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
+                </p>
+              </div>
+            )}
             <div className="L1">
               <p>Total without VAT </p>
               <p>{Math.ceil(itemsPrice)} SAR</p>
@@ -139,6 +168,8 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         </div>
         <br />
       </div>
+      <hr />
+      <OfferComponent codeE={"HAS432"} />
       <br />
       <hr />
       <div className="welcome">
