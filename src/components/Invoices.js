@@ -59,8 +59,8 @@ function Invoices(props) {
   };
 
   const handleEdit = async (id, todo) => {
-    console.log("edit id", id);
-    console.log("todo edit", todo);
+    // console.log("edit id", id);
+    // console.log("todo edit", todo);
     await updateDoc(doc(db, "todos", todo.id), {
       // do things
       // completed: !todo.completed,
@@ -69,7 +69,6 @@ function Invoices(props) {
 
   const total = todos.reduce((a, c) => a + c.totalPrice, 0);
   const soldItems = todos.reduce((a, c) => a + c.totalItems, 0);
-
   return (
     <div className={`${style.bg} invoices`}>
       <div className={style.container}>

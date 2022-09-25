@@ -16,6 +16,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     isOffer,
     itemPriceBefore,
   } = props;
+
   // console.log("itemsPrice", itemsPrice);
   // console.log("itemsPriceBefore", itemPriceBefore);
   return (

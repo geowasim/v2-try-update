@@ -19,7 +19,7 @@ const Preview = React.forwardRef((props, ref) => {
     <div
       className="fatorah"
       ref={ref}
-      style={{ height: "82vh", width: "100%" }}
+      style={{ height: "82vh", width: "100%", scale: "0.95" }}
     >
       <div className="perData">
         <p>معرض صناع العطور - الاحساء</p>

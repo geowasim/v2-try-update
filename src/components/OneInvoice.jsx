@@ -1,16 +1,17 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
-// import { useNavigate } from "react-router-dom";
-
-import { InvoiceToPrint } from "./InvoiceToPrint/InvoiceToPrint";
 import { useReactToPrint } from "react-to-print";
 import { FaRegTrashAlt, FaPrint } from "react-icons/fa";
+// import { useNavigate } from "react-router-dom";
+
+// import { InvoiceToPrint } from "./InvoiceToPrint/InvoiceToPrint";
+// import Reback from "./Reback/Reback";
 
 import "./OneInvoice.css";
-// import Reback from "./Reback/Reback";
+
 import { createContext } from "react";
 import { totalBeforeAfterOfferType } from "../OfferFunction";
-
+import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
 export const InvoiceContext = createContext();
 
 const OneInvoice = ({
@@ -20,27 +21,31 @@ const OneInvoice = ({
   handleEdit,
   readDataFromInvoiceComponent,
 }) => {
-  const { cartItems, methodArray, invoiceNumber, off } = todo;
-  const [cartItemsArrays, setCarItemsArrays] = useState([]);
+  const {
+    cartItems,
+    methodArray,
+    invoiceNumber,
+    off,
+    paidandchange,
+    dateMyPC,
+    totalPrice,
+  } = todo;
+  const { isOffer } = off;
+  const { change, paidMoney } = paidandchange;
+  const serialNumber = invoiceNumber.sn;
+  const timeInMyPC = dateMyPC;
 
-  useEffect(() => {
-    const arr = [];
-    for (const key in cartItems) {
-      if (Object.hasOwnProperty.call(cartItems, key)) {
-        const element = cartItems[key];
-        arr.push(element);
-      }
-    }
-    setCarItemsArrays(arr);
-  }, [cartItems]);
+  const otherPrice = totalBeforeAfterOfferType(cartItems).otherPrice;
+  const perfumePrice = totalBeforeAfterOfferType(cartItems).after;
 
-  const otherPrice = totalBeforeAfterOfferType(cartItemsArrays).otherPrice;
-  const perfumePrice = totalBeforeAfterOfferType(cartItemsArrays).after;
+  const itemPriceBefore = totalBeforeAfterOfferType(cartItems).before;
+
+  const itemsPrice = perfumePrice + otherPrice;
 
   const subtotal = perfumePrice + otherPrice;
   // console.log("off", off);
   // const subtotal = Math.round(todo.totalPrice);
-  const totalItems = cartItemsArrays.reduce((a, c) => a + c.qty, 0);
+  const totalItems = cartItems.reduce((a, c) => a + c.qty, 0);
 
   const componentRef = useRef();
   const handleReactToPrint = useReactToPrint({
@@ -59,54 +64,48 @@ const OneInvoice = ({
   // };
 
   return (
-    <InvoiceContext.Provider
-      value={{
-        cartItems,
-        methodArray,
-        invoiceNumber,
-        cartItemsArrays,
-        subtotal,
-        off,
-      }}
-    >
-      <div className="myOneInvoice">
-        <p>{todo.invoiceNumber.sn}</p>
-        <p>{(subtotal * 15) / 100 + subtotal}</p>
-        <p>{totalItems}</p>
-        <p>{methodArray.method}</p>
-        <p>{todo.dateMyPC}</p>
+    <div className="myOneInvoice">
+      <p>{todo.invoiceNumber.sn}</p>
+      <p>{(subtotal * 15) / 100 + subtotal}</p>
+      <p>{totalItems}</p>
+      <p>{methodArray.method}</p>
+      <p>{todo.dateMyPC}</p>
 
-        <p
-          onClick={function () {
-            handlePrint();
-          }}
-          style={{
-            cursor: "pointer",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <FaPrint />
-        </p>
-        {/* <p onClick={() => handleEdit(todo.id, todo)}>
+      <p
+        onClick={function () {
+          handlePrint();
+        }}
+        style={{
+          cursor: "pointer",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <FaPrint />
+      </p>
+      {/* <p onClick={() => handleEdit(todo.id, todo)}>
           <FaEdit />
         </p>
         <Reback />
         <p onClick={() => rebackHandler(todo)}>Edit</p> */}
 
-        <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button>
-        <div style={{ display: "none" }}>
-          <InvoiceToPrint
-            todo={todo}
-            ref={componentRef}
-            cartItemsArrays={cartItemsArrays}
-            methodArray={methodArray}
-            invoiceNumber={invoiceNumber}
-            subtotal={subtotal}
-          />
-        </div>
+      {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
+      <div style={{ display: "none" }}>
+        <ComponentToPrint
+          cartItems={cartItems}
+          ref={componentRef}
+          itemsPrice={itemsPrice}
+          method={methodArray.method}
+          paidMoney={paidMoney}
+          change={change}
+          serialNumber={serialNumber}
+          timeInMyPC={timeInMyPC}
+          totalPrice={totalPrice}
+          isOffer={isOffer}
+          itemPriceBefore={itemPriceBefore}
+        />
       </div>
-    </InvoiceContext.Provider>
+    </div>
   );
 };
 
