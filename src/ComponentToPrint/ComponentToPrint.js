@@ -170,9 +170,9 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         <br />
       </div>
       <hr />
+      <br />
       <OfferComponent codeE={"HAS432"} />
       <br />
-      <hr />
       <div className="welcome">
         <p style={{ marginTop: "10px" }}> نشكركم لاختياركم منتجاتنا </p>
         <p> Thank you for choosing our products</p>
