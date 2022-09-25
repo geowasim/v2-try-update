@@ -17,44 +17,44 @@ const Preview = React.forwardRef((props, ref) => {
 
   return (
     <div
-      className="fatorah"
+      className="fatorah-p"
       ref={ref}
       style={{ height: "82vh", width: "100%", scale: "0.95" }}
     >
-      <div className="perData">
+      <div className="perData-p">
         <p>معرض صناع العطور - الاحساء</p>
         <p>Simplified Vat Invoice</p>
         <p>فاتورة ضريبية مبسطة</p>
 
         <p>Vat: 310430668500003 :الرقم الضريبي</p>
 
-        <p>C.R: 1010208753 :س .ت</p>
+        <p>C.R: 1010725434 :س .ت</p>
       </div>
-      <div className="clientDataContainer">
-        <div className="L1">
+      <div className="clientDataContainer-p">
+        <div className="L1-p">
           <p>Customer: Expo Customer</p>
           <p>Phone: </p>
         </div>
-        <div className="L1">
+        <div className="L1-p">
           <p>Flat: </p>
           <p>Building:</p>
         </div>
-        <div className="L1">
+        <div className="L1-p">
           <p>Street: </p>
           <p>Block: </p>
         </div>
       </div>
       <hr />
 
-      <div className="casher">
+      <div className="casher-p">
         <p style={{ display: "none" }}>Cachier: </p>
         <p>Salesperson: EXPO </p>
-        <div className="date" style={{ marginTop: "5px" }}>
+        <div className="date-p" style={{ marginTop: "5px" }}>
           <p>{timeInMyPC}</p>
           <span style={{ fontSize: "11px" }}>order# {serialNumber}</span>
         </div>
       </div>
-      <div className="p-5" style={{ padding: "0", marginTop: "5px" }}>
+      <div className="p-5-p" style={{ padding: "0", marginTop: "5px" }}>
         {/* ref to chcek  ref={ref}*/}
         <table className="table">
           <thead>
@@ -85,10 +85,10 @@ const Preview = React.forwardRef((props, ref) => {
               : ""}
           </tbody>
         </table>
-        <div className="paymentDataContainer">
-          <div className="paymentData ">
+        <div className="paymentDataContainer-p">
+          <div className="paymentData-p ">
             {isOffer && (
-              <div className="L1" style={{ fontSize: "12px" }}>
+              <div className="L1-p" style={{ fontSize: "12px" }}>
                 <p
                   style={{
                     display: "flex",
@@ -104,22 +104,22 @@ const Preview = React.forwardRef((props, ref) => {
               </div>
             )}
             {isOffer && (
-              <div className="L1">
+              <div className="L1-p">
                 <p>Discount *</p>
                 <p>
                   <b>{Math.ceil(itemsPrice) - itemPriceBefore} SAR</b>
                 </p>
               </div>
             )}
-            <div className="L1">
+            <div className="L1-p">
               <p>Subtotal without VAT </p>
               <p>{Math.ceil(itemsPrice)} SAR</p>
             </div>
-            <div className="L1">
+            <div className="L1-p">
               <p>VAT 15%</p>
               <p>{Math.ceil(itemsPrice * 15) / 100} SAR </p>
             </div>
-            <div className="L1" style={{ fontSize: "12px" }}>
+            <div className="L1-p" style={{ fontSize: "12px" }}>
               <p
                 style={{
                   display: "flex",
@@ -135,7 +135,7 @@ const Preview = React.forwardRef((props, ref) => {
                 {(itemsPrice * 15) / 100 + itemsPrice} SAR
               </h4>
             </div>
-            <div className="L1">
+            <div className="L1-p">
               <p> payment by : طريقة الدفع </p>
               <p
                 style={{
@@ -148,18 +148,18 @@ const Preview = React.forwardRef((props, ref) => {
               </p>
             </div>
             {method === "Mada" ? (
-              <div className="L1">
+              <div className="L1-p">
                 <p> Received: المبلغ المستلم</p>
                 <p> {(itemsPrice * 15) / 100 + itemsPrice} SAR</p>
               </div>
             ) : (
               <>
-                <div className="L1">
+                <div className="L1-p">
                   <p>المبلغ المستلم Received:</p>
                   <p style={{ fontSize: "15px" }}> {paidMoney} SAR</p>
                 </div>
 
-                <div className="L1">
+                <div className="L1-p">
                   <p>المتبقي للعميل Change:</p>
                   <p style={{ fontSize: "15px", fontStyle: "italic" }}>
                     SAR {change}
