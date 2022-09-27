@@ -25,15 +25,15 @@ const OneInvoice = ({
     cartItems,
     methodArray,
     invoiceNumber,
-    off,
     paidandchange,
     dateMyPC,
     totalPrice,
   } = todo;
-  const { isOffer } = off;
+  const { isOffer } = todo.off ? todo.off : "";
+  console.log(isOffer);
   const { change, paidMoney } = paidandchange;
   const serialNumber = invoiceNumber.sn;
-  const timeInMyPC = dateMyPC;
+  const timeInMyPC = todo.off ? dateMyPC : new Date(dateMyPC).toISOString();
 
   const otherPrice = totalBeforeAfterOfferType(cartItems).otherPrice;
   const perfumePrice = totalBeforeAfterOfferType(cartItems).after;
@@ -100,7 +100,7 @@ const OneInvoice = ({
           serialNumber={serialNumber}
           timeInMyPC={timeInMyPC}
           totalPrice={totalPrice}
-          isOffer={isOffer}
+          isOffer={isOffer ? isOffer : ""}
           itemPriceBefore={itemPriceBefore}
         />
       </div>

@@ -34,7 +34,7 @@ function Invoices(props) {
     const q = query(
       collection(db, "hasa22"),
       orderBy("invoiceNumber", "desc"),
-      limit(15)
+      limit(20)
     );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
