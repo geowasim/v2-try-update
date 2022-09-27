@@ -2,7 +2,9 @@ import React from "react";
 import { Buffer } from "buffer";
 
 import OfferComponent from "../OffersComponent/OfferComponent";
-import QRCode from "qrcode.react";
+// import QRCode from "qrcode.react";
+import QRCode from "react-qr-code";
+
 import "./ComponentToPrint.css";
 import { getTLVForValue } from "./BarcodeFunction";
 
@@ -208,7 +210,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}
       >
-        <QRCode value={qrCodeB64} renderAs="canvas" />
+        <QRCode value={qrCodeB64} />
       </div>
       <br />
       <hr />
