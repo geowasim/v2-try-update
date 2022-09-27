@@ -18,6 +18,7 @@ function App() {
   const readDataFromInvoiceComponent = (data) => {
     setDatafromInvoice(data);
   };
+
   return (
     <div>
       <AuthContextProvider>

@@ -16,6 +16,7 @@ export const InvoiceContext = createContext();
 
 const OneInvoice = ({
   todo,
+  isEcode,
   toggleComplete,
   deleteTodo,
   handleEdit,
@@ -30,7 +31,6 @@ const OneInvoice = ({
     totalPrice,
   } = todo;
   const { isOffer } = todo.off ? todo.off : "";
-  console.log(isOffer);
   const { change, paidMoney } = paidandchange;
   const serialNumber = invoiceNumber.sn;
   const timeInMyPC = todo.off ? dateMyPC : new Date(dateMyPC).toISOString();
@@ -102,6 +102,8 @@ const OneInvoice = ({
           totalPrice={totalPrice}
           isOffer={isOffer ? isOffer : ""}
           itemPriceBefore={itemPriceBefore}
+          todo={todo}
+          offerOrNot={todo.off}
         />
       </div>
     </div>

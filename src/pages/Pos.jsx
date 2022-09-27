@@ -4,7 +4,7 @@ import { UserAuth } from "../context/AuthContext";
 import { auth } from "../firebase";
 import Main from "../Main";
 import "./Pos.css";
-const Pos = () => {
+const Pos = ({ readEcode }) => {
   const { user, logout } = UserAuth();
 
   const navigate = useNavigate();

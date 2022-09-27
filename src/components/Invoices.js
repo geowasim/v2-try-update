@@ -55,13 +55,13 @@ function Invoices(props) {
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "hasa22", id));
+    await deleteDoc(doc(db, "todos", id));
   };
 
   const handleEdit = async (id, todo) => {
     // console.log("edit id", id);
     // console.log("todo edit", todo);
-    await updateDoc(doc(db, "hasa22", todo.id), {
+    await updateDoc(doc(db, "todos", todo.id), {
       // do things
       // completed: !todo.completed,
     });
@@ -111,49 +111,3 @@ function Invoices(props) {
 }
 
 export default Invoices;
-
-/**
- * // Create todo
-  const createTodo = async (e) => {
-    e.preventDefault(e);
-    if (input === "") {
-      alert("Please enter a valid todo");
-      return;
-    }
-    await addDoc(collection(db, "todos"), {
-      methodArray: {
-        method: "Mada",
-      },
-      cartItems: {
-        item1: {
-          id: 1,
-          title: "fiore",
-          descreption: "perfum",
-          category: "odor",
-          price: 199,
-          vol: 150,
-          qty: 1,
-        },
-        item2: {
-          id: 2,
-          title: "viola",
-          descreption: "spray",
-          category: "Hair Mist",
-          price: 50,
-          vol: 30,
-          qty: 1,
-        },
-      },
-      invoiceNumber: {
-        sn: 1000002,
-      },
-      sum: {
-        qty: 2,
-        subtotal: 398,
-        total: 457.7,
-      },
-    });
-    setInput("");
-  };
- * 
- */

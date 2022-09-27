@@ -20,6 +20,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
     // totalPrice,
     isOffer,
     itemPriceBefore,
+    offerOrNot,
   } = props;
 
   let timeBuf = `${timeInMyPC}`;
@@ -206,11 +207,33 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
       </div>
       <hr />
       <br />
-      {isOffer && <OfferComponent codeE={"HAS432"} />}
-      <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}
+      {offerOrNot && <OfferComponent codeE={"HAS432"} />}
+      {/* <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "15px",
+        }}
       >
         <QRCode value={qrCodeB64} />
+      </div> */}
+      <div
+        className="qr-container"
+        style={{
+          height: "auto",
+          margin: "0 auto",
+          maxWidth: 180,
+          width: "100%",
+          marginTop: "15px",
+        }}
+      >
+        <QRCode
+          className="qr-code"
+          size={256}
+          style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+          value={qrCodeB64}
+          viewBox={`0 0 256 256`}
+        />
       </div>
       <br />
       <hr />
