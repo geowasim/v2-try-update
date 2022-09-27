@@ -104,9 +104,13 @@ const Basket = (props) => {
   }, [serialNumber]);
 
   let date = new Date();
-  let timeInMyPC = new Date(
-    date.getTime() - date.getTimezoneOffset() * 60000
-  ).toISOString();
+  // let timeInMyPC = new Date().toISOString();
+  // let timeInMyPC = new Date(
+  //   date.getTime() - date.getTimezoneOffset() * 60000
+  // ).toISOString();
+
+  let tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+  let timeInMyPC = new Date(Date.now() - tzoffset).toISOString();
 
   // Create invoice
   const createInvoice = async () => {
