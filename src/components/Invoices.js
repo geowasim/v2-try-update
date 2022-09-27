@@ -32,7 +32,7 @@ function Invoices(props) {
   // Read todo from firebase
   useEffect(() => {
     const q = query(
-      collection(db, "todos"),
+      collection(db, "hasa22"),
       orderBy("invoiceNumber", "desc"),
       limit(15)
     );
@@ -48,20 +48,20 @@ function Invoices(props) {
 
   // Update todo in firebase
   const toggleComplete = async (todo) => {
-    await updateDoc(doc(db, "todos", todo.id), {
+    await updateDoc(doc(db, "hasa22", todo.id), {
       completed: !todo.completed,
     });
   };
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
+    await deleteDoc(doc(db, "hasa22", id));
   };
 
   const handleEdit = async (id, todo) => {
     // console.log("edit id", id);
     // console.log("todo edit", todo);
-    await updateDoc(doc(db, "todos", todo.id), {
+    await updateDoc(doc(db, "hasa22", todo.id), {
       // do things
       // completed: !todo.completed,
     });

@@ -8,8 +8,9 @@ import Invoices from "./components/Invoices";
 import Pos from "./pages/Pos";
 import Reback from "./components/Reback/Reback";
 import { useState, useContext, createContext } from "react";
+import { auth } from "./firebase";
 
-const InvoiceRebackContext = createContext();
+// const InvoiceRebackContext = createContext();
 
 function App() {
   const [dataFromInvoice, setDatafromInvoice] = useState({});

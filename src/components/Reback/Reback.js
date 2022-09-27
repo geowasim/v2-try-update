@@ -32,7 +32,7 @@ export default function Reback() {
 
   // Read todo from firebase
   useEffect(() => {
-    const q = query(collection(db, "todos"), orderBy("invoiceNumber", "desc"));
+    const q = query(collection(db, "hasa22"), orderBy("invoiceNumber", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
       querySnapshot.forEach((doc) => {

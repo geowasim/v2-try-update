@@ -5,7 +5,7 @@ import { ComponentToPrint } from "../ComponentToPrint/ComponentToPrint";
 import "./Cart.css";
 import Payment from "../payments/Payment";
 
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import {
   query,
   collection,
@@ -19,7 +19,7 @@ import {
 } from "firebase/firestore";
 import Dialog from "./Dialog";
 import { totalBeforeAfterOfferType } from "../OfferFunction";
-import MethodsOfPayment from "./MethodsOfPayment";
+import MethodsOfPayment from "../payments/MethodsOfPayment";
 
 const Basket = (props) => {
   const {
@@ -86,13 +86,13 @@ const Basket = (props) => {
     setChange(value <= 0 ? (value * -1).toFixed(2) : "");
   };
 
-  const [serialNumber, setSerialNumber] = useState(null || 1000000);
+  const [serialNumber, setSerialNumber] = useState(null || 1000296);
 
   //get lastSn //
   //get data frm const {second} = first
   // Read todo from firebase
   useEffect(() => {
-    const q = query(collection(db, "todos"), orderBy("invoiceNumber", "desc"));
+    const q = query(collection(db, "hasa22"), orderBy("invoiceNumber", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
       querySnapshot.forEach((doc) => {
@@ -103,11 +103,14 @@ const Basket = (props) => {
     return () => unsubscribe();
   }, [serialNumber]);
 
-  const timeInMyPC = String(new Date().toLocaleString());
+  let date = new Date();
+  let timeInMyPC = new Date(
+    date.getTime() - date.getTimezoneOffset() * 60000
+  ).toISOString();
 
   // Create invoice
   const createInvoice = async () => {
-    await addDoc(collection(db, "todos"), {
+    await addDoc(collection(db, "hasa22"), {
       methodArray: {
         method: method,
       },
@@ -124,6 +127,10 @@ const Basket = (props) => {
       totalPrice: totalPrice,
       totalItems: totalItems,
       off: { isOffer: isOffer, codeE: codeE },
+      casher: auth.currentUser.email.slice(
+        0,
+        auth.currentUser.email.indexOf("@")
+      ),
     });
   };
   return (
@@ -231,7 +238,7 @@ const Basket = (props) => {
         <hr />
         {/* handle method of payment */}
         {/* choose payment method */}
-        {cartItems.length !== 0 && <MethodsOfPayment />}
+        {/* {cartItems.length !== 0 && <MethodsOfPayment />} */}
         {cartItems.length !== 0 && (
           <div className="payments">
             <div className="paymentArea">

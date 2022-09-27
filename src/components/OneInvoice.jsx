@@ -88,7 +88,6 @@ const OneInvoice = ({
         </p>
         <Reback />
         <p onClick={() => rebackHandler(todo)}>Edit</p> */}
-
       {/* <button onClick={() => deleteTodo(todo.id)}>{<FaRegTrashAlt />}</button> */}
       <div style={{ display: "none" }}>
         <ComponentToPrint
