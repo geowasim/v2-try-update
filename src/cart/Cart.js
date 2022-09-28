@@ -209,7 +209,7 @@ const Basket = (props) => {
                   margin: "15px 15px",
                 }}
               >
-                <span>السعر الاجمالي</span> شامل الضريبة
+                <span>السعر الاجمالي</span>
               </div>
               <div
                 style={{

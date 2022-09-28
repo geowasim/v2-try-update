@@ -100,14 +100,6 @@ export default function Reback() {
       {!error && cartItems && (
         <InvoiceMain basket={basket} cartItems={cartItems} />
       )}
-      {/* {invoiceToReturn &&
-        invoiceToReturn.cartItems.map((item) => {
-          return (
-            <div key={item.id}>
-              <Invoicetoreback item={item} />
-            </div>
-          );
-        })} */}
       {invoiceToReturn && (
         <button
           className="itemButton"
@@ -172,3 +164,13 @@ export default function Reback() {
   );
 }
  */
+// {
+//   /* {invoiceToReturn &&
+//         invoiceToReturn.cartItems.map((item) => {
+//           return (
+//             <div key={item.id}>
+//               <Invoicetoreback item={item} />
+//             </div>
+//           );
+//         })} */
+// }

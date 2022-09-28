@@ -11,6 +11,7 @@ import {
   limit,
   deleteDoc,
   orderBy,
+  where,
 } from "firebase/firestore";
 
 import "./OneInvoice.css";
@@ -34,8 +35,9 @@ function Invoices(props) {
     const q = query(
       collection(db, "hasa22"),
       orderBy("invoiceNumber", "desc"),
-      limit(20)
+      where("invoiceNumber", ">", { sn: 1000295 })
     );
+
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let todosArr = [];
       querySnapshot.forEach((doc) => {
@@ -55,13 +57,13 @@ function Invoices(props) {
 
   // Delete todo
   const deleteTodo = async (id) => {
-    await deleteDoc(doc(db, "todos", id));
+    await deleteDoc(doc(db, "hasa22", id));
   };
 
   const handleEdit = async (id, todo) => {
     // console.log("edit id", id);
     // console.log("todo edit", todo);
-    await updateDoc(doc(db, "todos", todo.id), {
+    await updateDoc(doc(db, "hasa22", todo.id), {
       // do things
       // completed: !todo.completed,
     });

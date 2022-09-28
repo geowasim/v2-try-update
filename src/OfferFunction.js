@@ -92,3 +92,17 @@ export function totalBeforeAfterOfferType(cartItems) {
     return { before: 0, after: 0, offerType: [0], otherPrice: otherPrice };
   }
 }
+
+// sort Object
+function sortObject(arr) {
+  arr.map((obj) => {
+    let mm = Object.keys(obj)
+      .sort()
+      .reduce((a, v) => {
+        a[v] = obj[v];
+        return a;
+      }, {});
+    console.log("mm", mm);
+    return mm;
+  });
+}

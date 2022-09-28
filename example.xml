@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- xml Prolog -->
+<!-- xml root books -->
+<!-- xmlns:prefix="URI" -->
+
+<books xmlns:f="http://www.w3.org/tables"
+xmlns:h="http://www.w3.org/TR/html4">
+  <book category='drama'>
+  <title>Wiii</title>
+  <writer>someone</writer>
+  <price>25$</price>
+  </book>
+  <book category='horror'>
+  <title>Boo Waaa</title>
+  <writer>another</writer>
+  <price>32$</price>
+  </book>
+  <articals>
+    <artical>Hello  world </artical>
+    <artical> Age &gt; 18 </artical>
+    <artical> Age &lt; 50 </artical>
+  </articals>
+  <goods>
+  <!-- here we declear prefix -->
+    <h:table >
+      <h:tr>
+        <h:td>Apple</h:td>
+        <h:td>Banana</h:td>
+      </h:tr>
+    </h:table>
+  </goods>
+  <goods>
+  <!-- here we declear prefix or in the root-->
+    <f:table >
+        <f:name>Coffe Table</f:name>
+        <f:width>100</f:width>
+        <f:height>70</f:height>
+    </f:table>
+  </goods>
+  <cars>
+  <!-- declear default namesapce-->
+  <!-- xmlns="namespace URI" -->
+    <table  xmlns="http://www.w3.org/TR/html4" >
+        <name>Coffe Table</name>
+        <width>120</width>
+        <length>250</length>
+    </table>
+  </cars>
+  
+</books>
